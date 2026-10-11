@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    
+</head>
+
+<body>
+
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg py-1 mx-auto bg-white position-fixed w-100">
+        <div class="container">
+
+            <!-- Left -->
+            <div class="nav-left d-flex gap-2 align-items-center">
+
+                <div class="nav-icon d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-address-book text-white fs-5"></i>
+                </div>
+
+                <div class="nav-caption mt-3">
+                    <h4 class="mb-0 fw-bold">Contact<span>Hub</span></h4>
+                    <p class="mt-0 text-muted small">Smart Contact Manager</p>
+                </div>
+
+            </div>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <div class="nav-right ms-auto d-flex gap-4 align-items-center mt-3 mt-lg-0">
+
+                    <div class="nav-btn d-flex justify-content-center align-items-center">
+                        <button id="openAddModalBtn" class="btn rounded-3 px-3 py-2 fw-bold" data-bs-toggle="modal"
+                            data-bs-target="#addContactModal">
+                            <i class="fa-solid fa-plus"></i> Add Contact
+                        </button>
+                    </div>
+
+                    <div class="icon d-flex justify-content-center align-items-center fs-6 border-0">
+                        <i class="fa-solid fa-bell me-3"></i>
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+
+                    <div class="imag rounded-3 d-flex justify-content-center align-items-center overflow-hidden">
+                        <img src="images/avatar-4 (1).jpg" class="w-100 h-100 object-fit-cover rounded-2" alt="avatar">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- header -->
+    <div class="header py-5">
+        <header class="header py-5">
+
+            <div class="container py-5">
+                <div class="row g-3">
+
+                    <!-- Item 1 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="item item-1 d-flex gap-3 bg-white p-2 ps-4 h-100">
+
+                            <div class="icon d-flex justify-content-center align-items-center fs-5">
+                                <i
+                                    class="fa-solid fa-users text-white px-4 py-3 rounded-3 d-flex justify-content-center align-items-center"></i>
+                            </div>
+
+                            <div class="content">
+                                <h4>Total</h4>
+                                <h2 class="fs-4" id="totalCount">0</h2>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="item item-2 d-flex gap-3 bg-white p-2 ps-4 h-100">
+
+                            <div class="icon d-flex justify-content-center align-items-center fs-5">
+                                <i
+                                    class="fa-solid fa-star text-white bg-danger px-4 py-3 rounded-3 d-flex justify-content-center align-items-center"></i>
+                            </div>
+
+                            <div class="content">
+                                <h4>Favorites</h4>
+                                <h2 class="fs-4" id="favoritesCount">0</h2>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="item item-3 d-flex gap-3 bg-white p-2 ps-4 h-100">
+
+                            <div class="icon d-flex justify-content-center align-items-center fs-5">
+                                <i
+                                    class="fa-solid fa-heart-pulse text-white bg-danger px-4 py-3 rounded-3 d-flex justify-content-center align-items-center"></i>
+                            </div>
+
+                            <div class="content">
+                                <h4>Emergency</h4>
+                                <h2 class="fs-4" id="emergencyCount">0</h2>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="container">
+
+                <div class="row g-3">
+
+                    <!-- Left -->
+                    <div class="col-12 col-lg-8">
+                        <h3 class="fw-bold fs-2">All Contacts</h3>
+                        <p class="text-muted">Manage and organize your <span id="totalText">0</span> contacts</p>
+                        <input type="text" id="searchInput" class="form-control p-3"
+                            placeholder="Search by name, phone, or email..." aria-label="Search">
+
+                        <!-- Contact List Container -->
+                        <div id="contactsList" class="mt-4 row g-3">
+                            <!-- Cards will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Right -->
+                    <div class="col-12 col-lg-4">
+
+                        <!-- Box 1 -->
+                        <div class="box-1 p-3 rounded-4 bg-white position-relative mb-3">
+
+                            <div class="top d-flex gap-3 rounded-top-3 position-absolute px-3 py-3">
+
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <i
+                                        class="fa-solid fa-star text-white px-3 py-2 rounded-3 d-flex justify-content-center align-items-center"></i>
+                                </div>
+
+                                <div class="caption">
+                                    <h5 class="mb-0 fs-6">Favorites</h5>
+                                    <p class="mb-0 text-muted small">Quick access to starred contacts</p>
+                                </div>
+
+                            </div>
+
+                            <div class="content pt-5 mt-4 d-flex flex-column gap-2" id="favoritesList"
+                                style="max-height: 400px; overflow-y: auto;">
+                                <p class="text-center text-secondary py-4 w-100" id="noFavoritesMsg">No favorite
+                                    contacts yet.</p>
+                            </div>
+
+                        </div>
+
+                        <!-- Box 2 -->
+                        <div class="box-2 p-3 rounded-4 bg-white position-relative">
+
+                            <div class="top d-flex gap-3 rounded-top-3 position-absolute px-3 py-3">
+
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <i
+                                        class="fa-solid fa-heart-pulse text-white px-3 py-2 rounded-3 d-flex justify-content-center align-items-center"></i>
+                                </div>
+
+                                <div class="caption">
+                                    <h5 class="mb-0 fs-6">Emergency</h5>
+                                    <p class="mb-0 text-muted small">Important contacts for urgent calls</p>
+                                </div>
+
+                            </div>
+
+                            <div class="content pt-5 mt-4 d-flex flex-column gap-2" id="emergencyList"
+                                style="max-height: 400px; overflow-y: auto;">
+                                <p class="text-center text-secondary py-4 w-100" id="noEmergencyMsg">No emergency
+                                    contacts</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- contac model -->
+        <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 rounded-4 shadow-lg">
+                    <div class="modal-header px-4 py-3 border-bottom">
+                        <h5 class="modal-title fw-bold mb-0" id="addContactModalLabel">Add New Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="contactForm">
+                            <input type="hidden" id="ContactId">
+
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="position-relative">
+                                    <div class="icon bg-primary rounded-circle text-white d-flex justify-content-center align-items-center fs-3"
+                                        style="width: 80px; height: 80px;">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="Full-Name" class="mb-1 small">Full Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="fullName" class="form-control p-2 rounded-3"
+                                    placeholder="Enter full name" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="Phone-Number" class="mb-1 small">Phone Number <span
+                                        class="text-danger">*</span></label>
+                                <input type="tel" id="phoneNumber" class="form-control p-2 rounded-3"
+                                    placeholder="e.g., 01012345678" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="emailAddress" class="mb-1 small">Email Address</label>
+                                <input type="email" id="emailAddress" class="form-control p-2 rounded-3"
+                                    placeholder="name@example.com">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="Address" class="mb-1 small">Address</label>
+                                <input type="text" id="address" class="form-control p-2 rounded-3"
+                                    placeholder="Enter address">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="Group" class="mb-1 small">Group</label>
+                                <select class="form-select p-2 rounded-3" id="group">
+                                    <option value="" selected>Select a group</option>
+                                    <option value="Family">Family</option>
+                                    <option value="Friends">Friends</option>
+                                    <option value="Work">Work</option>
+                                    <option value="School">School</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="Notes" class="mb-1 small">Notes</label>
+                                <textarea class="form-control p-2 rounded-3" id="notes" rows="3"
+                                    placeholder="Add notes about this contact"></textarea>
+                            </div>
+
+                            <div class="d-flex gap-4 align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="favoriteCheck">
+                                    <label class="form-check-label small d-flex align-items-center" for="favoriteCheck">
+                                        <i class="fa-solid fa-star text-warning me-1"></i> Favorite
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="emergencyCheck">
+                                    <label class="form-check-label small d-flex align-items-center"
+                                        for="emergencyCheck">
+                                        <i class="fa-solid fa-heart-pulse text-danger me-1"></i> Emergency
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 w-100">
+                                <button type="button" id="addBtn" onclick="creatProduct()" class="btn btn-primary w-50 fw-bold"> <i
+                                        class="fa-regular  fa-thumbs-up"></i>Save contact </button>
+                                        <button type="button" id="updateBtn" onclick="UpdataFun()" class="btn btn-info d-none w-50">Save contact</button>
+                                <button type="button" class="btn btn-light w-50 fw-bold"
+                                    data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+<div id="contactsList" class="mt-4 row g-3">
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="JS/main.js"></script>
+</body>
+
+</html>
